@@ -19,7 +19,8 @@ class GoExecutor(ProcessExecutor):
             self.file_name = self.without_go
 
     def _compilation_command(self):
-        return ['go', 'build', self.runnable.file]
+        os.chdir('/checker')
+        return ['go', 'build', '/sandbox/' + self.runnable.file]
 
     def _filter_compilation_error(self, error: str) -> str:
         error_lines = [line for line in error.splitlines() if not line.startswith('#')]
